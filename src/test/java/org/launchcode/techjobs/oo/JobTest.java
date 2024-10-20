@@ -1,5 +1,6 @@
 package org.launchcode.techjobs.oo;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -41,6 +42,38 @@ public class JobTest {
         Job theJob2= new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
 
         assertFalse(theJob.equals(theJob2));
-        ;
+
+    }
+    @Test
+    public void testToStringStartsAndEndsWithNewLine(){
+        Job jobs = new Job("Junior Developer", new Employer("Tech Corp"), new Location("Remote"), new PositionType("Software Engineer"), new CoreCompetency("Java"));
+        String jobsString = jobs.toString();
+        String line = System.lineSeparator();
+        assertEquals(line, jobsString.substring(0,line.length()));
+        assertEquals(line, jobsString.substring(jobsString.length() - line.length()));
+    }
+    @Test
+    public void testToStringContainsCorrectLabelsAndData(){
+        Job jobs = new Job("Junior Developer", new Employer("Tech Corp"), new Location("Remote"), new PositionType("Software Engineer"), new CoreCompetency("Java"));
+         String outPut= System.lineSeparator() +
+              "ID: " + jobs.getId() + System.lineSeparator() +
+              "Name: Junior Developer" + System.lineSeparator() +
+              "Employer: Tech Corp" + System.lineSeparator() +
+              "Location: Remote" + System.lineSeparator() +
+              "Position Type: Software Engineer" + System.lineSeparator() +
+              "Core Competency: Java" + System.lineSeparator();
+       assertEquals(outPut,jobs.toString());
+    }
+    @Test
+    public void testToStringHandlesEmptyField(){
+        Job jobs = new Job("", new Employer(""), new Location("Remote"), new PositionType("Software Engineer"), new CoreCompetency("Java"));
+        String outPut= System.lineSeparator() +
+                "ID: " + jobs.getId() + System.lineSeparator() +
+                "Name: Data not available" + System.lineSeparator() +
+                "Employer: Data not available" + System.lineSeparator() +
+                "Location: Remote" + System.lineSeparator() +
+                "Position Type: Software Engineer" + System.lineSeparator() +
+                "Core Competency: Java" + System.lineSeparator();
+        assertEquals(outPut,jobs.toString());
     }
 }
