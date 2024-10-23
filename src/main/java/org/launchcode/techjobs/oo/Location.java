@@ -12,7 +12,7 @@ public class Location extends JobField{
        super(value);
     }
 
-    // Custom toString, equals, and hashCode methods:
+
 
     @Override
     public String toString() {
